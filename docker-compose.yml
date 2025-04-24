@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  cargo_hello_world:
+    image: rust
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
