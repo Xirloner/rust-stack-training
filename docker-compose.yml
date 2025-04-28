@@ -8,3 +8,16 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
+
+  postgres:
+    image: ankane/pgvector:pg17.4 # pgvector preinstalled!
+    container_name: postgres_vector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rust_rag
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
