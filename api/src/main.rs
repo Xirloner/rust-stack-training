@@ -1,12 +1,14 @@
+mod config;
 mod database;
 mod models;
 mod state;
+
+use crate::config::AppConfig;
 use anyhow::Result;
 use axum::extract::State;
 use axum::{Router, response::Json, routing::get};
 use database::connect_to_database;
 use deepseek_api::{Client, request::MessageRequest};
-use dotenv::dotenv;
 use serde_json::{Value, json};
 use state::AppState;
 use std::sync::Arc;
@@ -16,8 +18,8 @@ use tracing::error;
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
-    dotenv().ok();
-    let db = match connect_to_database().await {
+    let cfg = AppConfig::from_env().expect("Failed to load configuration");
+    let db = match connect_to_database(cfg.database_url).await {
         Ok(db) => db,
         Err(e) => {
             error!("Failed to connect to database: {}", e);
