@@ -22,8 +22,17 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DATABASE_URL: postgres://postgres:password@db/rust_rag
+      DATABASE_URL: postgres://postgres:password@postgres/rust_rag
     command: [ "./api" ]
+
+  ollama:
+    container_name: ollama
+    image: ollama/ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
 
 volumes:
   pgdata:
+  ollama_data:
