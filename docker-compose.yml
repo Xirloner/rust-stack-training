@@ -3,7 +3,11 @@ version: '3.4'
 services:
 
   postgres:
+<<<<<<< HEAD
+    image: pgvector/pgvector:pg17 # pgvector preinstalled!
+=======
     image: ankane/pgvector:latest # pgvector preinstalled!
+>>>>>>> 29f423debc6b7bd527f822841346c3f496fa3793
     container_name: postgres_vector
     environment:
       POSTGRES_USER: postgres
@@ -15,6 +19,10 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+<<<<<<< HEAD
+volumes:
+  pgdata:
+=======
   app:
     container_name: rust_deepkseep_caller
     build: .
@@ -37,3 +45,4 @@ services:
 volumes:
   pgdata:
   ollama_data:
+>>>>>>> 29f423debc6b7bd527f822841346c3f496fa3793
