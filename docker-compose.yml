@@ -1,16 +1,13 @@
 version: '3.4'
 
 services:
-  cargo_hello_world:
-    image: rust
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
 
   postgres:
+<<<<<<< HEAD
     image: pgvector/pgvector:pg17 # pgvector preinstalled!
+=======
+    image: ankane/pgvector:latest # pgvector preinstalled!
+>>>>>>> 29f423debc6b7bd527f822841346c3f496fa3793
     container_name: postgres_vector
     environment:
       POSTGRES_USER: postgres
@@ -22,5 +19,30 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+<<<<<<< HEAD
 volumes:
   pgdata:
+=======
+  app:
+    container_name: rust_deepkseep_caller
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres/rust_rag
+    command: [ "./api" ]
+
+  # ollama:
+  #   container_name: ollama
+  #   image: ollama/ollama
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   ports:
+  #     - "11434:11434"
+
+volumes:
+  pgdata:
+  ollama_data:
+>>>>>>> 29f423debc6b7bd527f822841346c3f496fa3793
