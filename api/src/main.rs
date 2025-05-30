@@ -41,7 +41,7 @@ async fn main() {
 }
 
 async fn query_ds() -> Result<()> {
-    let client = Client::new("");
+    let client = Client::new("sk-6b66ed53de1c4d709cb39dacf5df91a9");
     println!("In query_ds");
     let mut history = vec![];
     let mut completions = client.chat();

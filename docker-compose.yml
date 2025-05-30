@@ -16,14 +16,24 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
+    container_name: rust_deepkseep_caller
     build: .
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
+      - "3000:3000"
     environment:
-      DATABASE_URL: postgres://postgres:password@db/rust_rag
+      DATABASE_URL: postgres://postgres:postgres@postgres/rust_rag
     command: [ "./api" ]
+
+  # ollama:
+  #   container_name: ollama
+  #   image: ollama/ollama
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   ports:
+  #     - "11434:11434"
 
 volumes:
   pgdata:
+  ollama_data:
